@@ -1,0 +1,10 @@
+.toggle {
+    width: min(2vh, 2vw);
+    height: min(2vh, 2vw);
+
+    position: fixed;
+    bottom: min(2vh, 2vw);
+    right: min(2vh, 2vw);
+
+    background-color: red;
+}
