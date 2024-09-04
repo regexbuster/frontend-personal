@@ -1,5 +1,7 @@
+import styles from './about.page.module.css';
+
 function About() {
-    return <></>;
+    return <main className={styles.main}></main>;
 }
 
 export default About;

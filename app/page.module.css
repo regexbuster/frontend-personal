@@ -3,7 +3,8 @@
     color: var(--fg);
 
     width: 100vw;
-    height: 92.5vh;
+    min-height: 92.5vh;
+    height: auto;
 }
 
 .vertFlex {
@@ -14,6 +15,10 @@
     align-items: center;
 
     gap: 1rem;
+}
+
+.smallPadding {
+    padding: 1rem;
 }
 
 .card {
