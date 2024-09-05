@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import style from './blog.page.module.css';
 
@@ -15,6 +16,44 @@ function BlogContainer() {
         next: BlogLayoutType.GRID,
     });
 
+    const [posts, setPosts] = useState([]);
+
+    const getPosts = async () => {
+        let res = await axios.get('https://dummyjson.com/posts');
+
+        let refinedPosts = res.data.posts.map((post) => {
+            return {
+                id: post.id,
+                title: post.title,
+                description: post.body,
+                published: Date.now(),
+                edited: 0,
+            };
+        });
+
+        setPosts(refinedPosts);
+    };
+
+    useEffect(() => {
+        const storedLayout = localStorage.getItem('layout');
+
+        if (storedLayout) {
+            const values = Object.values(BlogLayoutType);
+            const newIndex = values.indexOf(storedLayout);
+            const len = values.length;
+
+            // loop back if we escape layout type length
+            const nextIndex = newIndex + 1 >= len ? 0 : i + 1;
+
+            setLayoutType({
+                current: values[newIndex],
+                next: values[nextIndex],
+            });
+        }
+
+        getPosts();
+    }, []);
+
     const toggleLayout = () => {
         const values = Object.values(BlogLayoutType);
         const i = values.indexOf(layoutType.current);
@@ -24,8 +63,7 @@ function BlogContainer() {
         const newIndex = i + 1 >= len ? 0 : i + 1;
         const nextIndex = i + 2 >= len ? i + 2 - len : i + 2;
 
-        console.log({ current: values[newIndex], next: values[nextIndex] });
-
+        localStorage.setItem('layout', values[newIndex]);
         setLayoutType({ current: values[newIndex], next: values[nextIndex] });
     };
 
@@ -34,23 +72,54 @@ function BlogContainer() {
     };
 
     return (
-        <div>
-            <button onClick={toggleLayout}>
-                {toUpperFirstLetter(layoutType.current)}
+        <>
+            <button onClick={toggleLayout} className={style.toggle}>
+                {toUpperFirstLetter(layoutType.next)}
             </button>
-        </div>
+            <div
+                className={
+                    layoutType.current == BlogLayoutType.LIST
+                        ? style.bloglistcontainer
+                        : style.bloggridcontainer
+                }
+            >
+                {posts.map((post) => {
+                    return (
+                        <BlogCard
+                            layoutType={layoutType.current}
+                            blogData={post}
+                            key={post.id}
+                        ></BlogCard>
+                    );
+                })}
+            </div>
+        </>
     );
 }
 
 // blogdata {title: String, description: String, published: Date, edited: Date}
 // edited defaults to 0 when not edited
-function BlogCard({ layoutType, blogdata }) {
+function BlogCard({ layoutType, blogData }) {
+    const formattedDate = (dateInt) => {
+        let date = new Date(dateInt);
+        return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    };
+
     return (
         <>
-            {layoutType == BlogLayoutType.LIST ? (
-                <div className={style.bloglistitem}></div>
+            {layoutType === BlogLayoutType.LIST ? (
+                <div className={style.bloglistitem}>
+                    <p>
+                        <strong>{blogData.title}</strong> {' --- '}
+                        {formattedDate(blogData.published)}
+                    </p>
+                </div>
             ) : (
-                <div className={style.bloggriditem}></div>
+                <div className={style.bloggriditem}>
+                    <strong>{blogData.title}</strong>
+                    <p>{blogData.description.slice(0, 121) + '...'}</p>
+                    <p>{formattedDate(blogData.published)}</p>
+                </div>
             )}
         </>
     );
