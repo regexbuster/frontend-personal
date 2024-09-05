@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import style from './blog.page.module.css';
+
 const BlogLayoutType = {
     LIST: 'list',
     GRID: 'grid',
@@ -33,13 +35,25 @@ function BlogContainer() {
 
     return (
         <div>
-            <button onClick={toggleLayout}>{layoutType.current}</button>
+            <button onClick={toggleLayout}>
+                {toUpperFirstLetter(layoutType.current)}
+            </button>
         </div>
     );
 }
 
-function BlogCard({ layoutType }) {
-    return <div></div>;
+// blogdata {title: String, description: String, published: Date, edited: Date}
+// edited defaults to 0 when not edited
+function BlogCard({ layoutType, blogdata }) {
+    return (
+        <>
+            {layoutType == BlogLayoutType.LIST ? (
+                <div className={style.bloglistitem}></div>
+            ) : (
+                <div className={style.bloggriditem}></div>
+            )}
+        </>
+    );
 }
 
 module.exports = {
