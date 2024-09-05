@@ -43,7 +43,7 @@ function BlogContainer() {
             const len = values.length;
 
             // loop back if we escape layout type length
-            const nextIndex = newIndex + 1 >= len ? 0 : i + 1;
+            const nextIndex = newIndex + 1 >= len ? 0 : newIndex + 1;
 
             setLayoutType({
                 current: values[newIndex],
