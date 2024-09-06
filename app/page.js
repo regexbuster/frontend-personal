@@ -3,13 +3,13 @@ import styles from './page.module.css';
 export default function Home() {
     return (
         <main className={styles.main}>
-            <h1>Heading 1</h1>
+            {/* <h1>Heading 1</h1>
             <h2>Heading 2</h2>
             <h3>Heading 3</h3>
             <h4>Heading 4</h4>
             <h5>Heading 5</h5>
-            <h6>Heading 6</h6>
-            <div className={styles.vertFlex}>
+            <h6>Heading 6</h6> */}
+            <div className={`${styles.vertFlex} ${styles.smallPadding}`}>
                 <div className={styles.card}>
                     <h1>My name is Benjamin Franks</h1>
                     <p>
@@ -29,6 +29,14 @@ export default function Home() {
                         to showcase the work I've done through blog posts.
                     </p>
                 </div>
+                <div className={styles.card}>Hello World</div>
+                <div className={styles.card}>Hello World</div>
+                <div className={styles.card}>Hello World</div>
+                <div className={styles.card}>Hello World</div>
+                <div className={styles.card}>Hello World</div>
+                <div className={styles.card}>Hello World</div>
+                <div className={styles.card}>Hello World</div>
+                <div className={styles.card}>Hello World</div>
                 <div className={styles.card}>Hello World</div>
                 <div className={styles.card}>Hello World</div>
                 <div className={styles.card}>Hello World</div>

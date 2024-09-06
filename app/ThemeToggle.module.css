@@ -1,6 +1,6 @@
 .toggle {
-    width: min(2vh, 2vw);
-    height: min(2vh, 2vw);
+    width: min(3vh, 3vw);
+    height: min(3vh, 3vw);
 
     position: fixed;
     bottom: min(2vh, 2vw);

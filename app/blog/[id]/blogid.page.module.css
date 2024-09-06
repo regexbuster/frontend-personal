@@ -5,24 +5,24 @@
     width: 100vw;
     min-height: 92.5vh;
     height: auto;
-}
 
-.vertFlex {
     display: flex;
     flex-flow: column;
 
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
-    gap: 1rem;
+    padding-top: 2vh;
 }
 
-.smallPadding {
-    padding: 1rem;
-}
+.blogContent {
+    display: flex;
+    flex-flow: column;
 
-.card {
-    width: 80%;
+    overflow-wrap: anywhere;
+
+    min-height: 30vh;
+    width: 60vw;
 
     background-color: var(--bg1);
 
