@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 import style from './blog.page.module.css';
@@ -17,6 +18,8 @@ function BlogContainer() {
     });
 
     const [posts, setPosts] = useState([]);
+
+    const router = useRouter();
 
     const getPosts = async () => {
         let res = await axios.get('https://dummyjson.com/posts');
@@ -85,11 +88,18 @@ function BlogContainer() {
             >
                 {posts.map((post) => {
                     return (
-                        <BlogCard
-                            layoutType={layoutType.current}
-                            blogData={post}
-                            key={post.id}
-                        ></BlogCard>
+                        <button
+                            className={style.buttonWrapper}
+                            onClick={() => {
+                                router.push(`/blog/${post.id}`);
+                            }}
+                        >
+                            <BlogCard
+                                layoutType={layoutType.current}
+                                blogData={post}
+                                key={post.id}
+                            ></BlogCard>
+                        </button>
                     );
                 })}
             </div>

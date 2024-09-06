@@ -21,18 +21,28 @@
 
     justify-content: space-between;
     align-items: center;
+    gap: 2vh;
 }
 
 .bloggridcontainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 5vw;
-    grid-row-gap: 5vh;
+    grid-column-gap: 2vw;
+    grid-row-gap: 2vh;
 }
 
 .bloglistitem {
     display: flex;
     flex-flow: row;
+
+    background-color: var(--bg1);
+
+    border: 0.15rem solid var(--bg2);
+    border-radius: 1rem;
+
+    padding: 1rem;
+
+    box-shadow: 0.25rem 0.25rem 0.1rem 0.1rem var(--bg1);
 }
 
 .bloggriditem {
@@ -63,4 +73,8 @@
     right: 5vw;
 
     font-size: 1rem;
+}
+
+.buttonWrapper {
+    all: unset;
 }
