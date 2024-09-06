@@ -1,31 +1,21 @@
-'use client';
-
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-
 import axios from 'axios';
+import BlogDataGetter from './BlogDataGetter';
+
+import styles from './blogid.page.module.css';
+
+export async function generateStaticParams() {
+    const res = await axios.get(`https://dummyjson.com/posts`);
+
+    return res.data.posts.map((post) => ({
+        id: `${post.id}`,
+    }));
+}
 
 function BlogId({ params }) {
-    const router = useRouter();
-    const [blogData, setBlogData] = useState({});
-
-    const getData = async () => {
-        let data = await (
-            await axios.get(`https://dummyjson.com/posts/${router.query.id}`)
-        ).json();
-
-        setBlogData({ title: data.title, content: data.body });
-    };
-
-    useEffect(() => {
-        getData();
-    }, []);
-
     return (
-        <div>
-            <h1>{blogData.title}</h1>
-            <p>{blogData.content}</p>
-        </div>
+        <main className={styles.main}>
+            <BlogDataGetter id={params.id} />
+        </main>
     );
 }
 
