@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
+import { getDBPosts } from '@/utils/db.js';
 
 import style from './blog.page.module.css';
 
@@ -22,7 +22,12 @@ function BlogContainer() {
     const router = useRouter();
 
     const getPosts = async () => {
-        let res = await axios.get('https://dummyjson.com/posts');
+        // let res = await axios.get('https://dummyjson.com/posts');
+        let [res, err] = await getDBPosts();
+
+        if (err != null) {
+            return [];
+        }
 
         let refinedPosts = res.data.posts.map((post) => {
             return {

@@ -12,6 +12,9 @@ function BlogDataGetter({ id }) {
         axios.get(`https://dummyjson.com/posts/${id}`).then((res) => {
             setBlogData(res.data);
         });
+        axios.get('/api/posts').then((res) => {
+            console.log(res);
+        });
     }, []);
 
     return (
