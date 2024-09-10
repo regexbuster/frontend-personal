@@ -9,13 +9,30 @@ if (!MONGODB_URI) {
 let cached = global.mongoose;
 
 if (!cached) {
-    cached = global.mongoose = { conn: null };
+    cached = global.mongoose = { conn: null, promise: null };
 }
 
 export const dbConnect = async () => {
-    try {
-        await mongoose.connect(process.env.MONGODB_URI);
-    } catch (error) {
-        throw new Error('MongoDB connection failed.');
+    if (cached.conn) {
+        return cached.conn;
+    }
+
+    if (!cached.promise) {
+        const opts = {
+            bufferCommands: false,
+        };
+
+        cached.promise = (await mongoose.connect(MONGODB_URI, opts)).then(
+            (mongoosePromise) => {
+                return mongoosePromise;
+            }
+        );
+
+        try {
+            cached.conn = await cached.promise;
+        } catch (err) {
+            throw err;
+        }
+        return cached.conn;
     }
 };

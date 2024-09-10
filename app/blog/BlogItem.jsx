@@ -2,16 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { getPosts } from '@/actions/dbOperations';
+import { dbConnect } from '@/utils/db';
 
 import style from './blog.page.module.css';
 import axios from 'axios';
+import mongoose from 'mongoose';
 
 const BlogLayoutType = {
     LIST: 'list',
     GRID: 'grid',
 };
 
-function BlogContainer() {
+export function BlogContainer({}) {
     const [layoutType, setLayoutType] = useState({
         current: BlogLayoutType.LIST,
         next: BlogLayoutType.GRID,
@@ -20,15 +23,6 @@ function BlogContainer() {
     const [posts, setPosts] = useState([]);
 
     const router = useRouter();
-
-    const getPosts = async () => {
-        try {
-            let res = await axios.get('/api/posts');
-            return { res: res.data.posts, err: null };
-        } catch (err) {
-            return { res: null, err };
-        }
-    };
 
     useEffect(() => {
         const storedLayout = localStorage.getItem('layout');
@@ -46,14 +40,6 @@ function BlogContainer() {
                 next: values[nextIndex],
             });
         }
-
-        getPosts().then(({ res, err }) => {
-            console.log(res, err);
-
-            if (!err) {
-                setPosts(res);
-            }
-        });
     }, []);
 
     const toggleLayout = () => {
@@ -85,22 +71,23 @@ function BlogContainer() {
                         : style.bloggridcontainer
                 }
             >
-                {posts.map((post) => {
-                    return (
-                        <button
-                            className={style.buttonWrapper}
-                            onClick={() => {
-                                router.push(`/blog/${post._id}`);
-                            }}
-                        >
-                            <BlogCard
-                                layoutType={layoutType.current}
-                                blogData={post}
-                                key={post._id}
-                            ></BlogCard>
-                        </button>
-                    );
-                })}
+                {console.log(posts) &&
+                    posts.map((post) => {
+                        return (
+                            <button
+                                className={style.buttonWrapper}
+                                onClick={() => {
+                                    router.push(`/blog/${post._id}`);
+                                }}
+                            >
+                                <BlogCard
+                                    layoutType={layoutType.current}
+                                    blogData={post}
+                                    key={post._id}
+                                ></BlogCard>
+                            </button>
+                        );
+                    })}
             </div>
         </>
     );
@@ -108,7 +95,7 @@ function BlogContainer() {
 
 // blogdata {title: String, description: String, published: Date, edited: Date}
 // edited defaults to 0 when not edited
-function BlogCard({ layoutType, blogData, key }) {
+export function BlogCard({ layoutType, blogData, key }) {
     const formattedDate = (dateInt) => {
         let date = new Date(dateInt);
         return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
@@ -133,8 +120,3 @@ function BlogCard({ layoutType, blogData, key }) {
         </>
     );
 }
-
-module.exports = {
-    BlogCard: BlogCard,
-    BlogContainer: BlogContainer,
-};
