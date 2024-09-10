@@ -1,14 +1,18 @@
 import axios from 'axios';
 import BlogDataGetter from './BlogDataGetter';
+import mongoose from 'mongoose';
 
 import styles from './blogid.page.module.css';
 
 export async function generateStaticParams() {
-    const res = await axios.get(`https://dummyjson.com/posts`);
+    const _ = await mongoose.connect(process.env.MONGODB_URI);
+    const { db } = mongoose.connection;
 
-    return res.data.posts.map((post) => ({
-        id: `${post.id}`,
-    }));
+    let posts = await db.collection('blogposts').find().toArray();
+
+    return posts.map((post) => {
+        return { id: `${post._id}` };
+    });
 }
 
 function BlogId({ params }) {

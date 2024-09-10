@@ -1,0 +1,27 @@
+.main {
+    display: flex;
+    flex-flow: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--bg);
+
+    height: 92.5vh;
+}
+
+.inputForm {
+    display: flex;
+    flex-flow: column;
+
+    width: 60vw;
+
+    background-color: var(--bg1);
+
+    border: 0.15rem solid var(--bg2);
+    border-radius: 1rem;
+
+    padding: 1rem;
+
+    box-shadow: 0.25rem 0.25rem 0.1rem 0.1rem var(--bg1);
+}

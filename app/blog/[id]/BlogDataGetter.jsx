@@ -9,15 +9,16 @@ function BlogDataGetter({ id }) {
     const [blogData, setBlogData] = useState({});
 
     useEffect(() => {
-        axios.get(`https://dummyjson.com/posts/${id}`).then((res) => {
-            setBlogData(res.data);
+        axios.get(`/api/posts?ID=${id}`).then((res) => {
+            setBlogData(res.data.posts[0]);
         });
     }, []);
 
     return (
         <div className={styles.blogContent}>
             <h1>{blogData.title}</h1>
-            <p>{blogData.body}</p>
+            <blockquote>{`> ${blogData.description}`}</blockquote>
+            <p>{blogData.content}</p>
         </div>
     );
 }

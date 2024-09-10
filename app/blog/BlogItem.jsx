@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
 
 import style from './blog.page.module.css';
+import axios from 'axios';
 
 const BlogLayoutType = {
     LIST: 'list',
@@ -22,19 +22,12 @@ function BlogContainer() {
     const router = useRouter();
 
     const getPosts = async () => {
-        let res = await axios.get('https://dummyjson.com/posts');
-
-        let refinedPosts = res.data.posts.map((post) => {
-            return {
-                id: post.id,
-                title: post.title,
-                description: post.body,
-                published: Date.now(),
-                edited: 0,
-            };
-        });
-
-        setPosts(refinedPosts);
+        try {
+            let res = await axios.get('/api/posts');
+            return { res: res.data.posts, err: null };
+        } catch (err) {
+            return { res: null, err };
+        }
     };
 
     useEffect(() => {
@@ -54,7 +47,13 @@ function BlogContainer() {
             });
         }
 
-        getPosts();
+        getPosts().then(({ res, err }) => {
+            console.log(res, err);
+
+            if (!err) {
+                setPosts(res);
+            }
+        });
     }, []);
 
     const toggleLayout = () => {
@@ -91,13 +90,13 @@ function BlogContainer() {
                         <button
                             className={style.buttonWrapper}
                             onClick={() => {
-                                router.push(`/blog/${post.id}`);
+                                router.push(`/blog/${post._id}`);
                             }}
                         >
                             <BlogCard
                                 layoutType={layoutType.current}
                                 blogData={post}
-                                key={post.id}
+                                key={post._id}
                             ></BlogCard>
                         </button>
                     );
@@ -109,7 +108,7 @@ function BlogContainer() {
 
 // blogdata {title: String, description: String, published: Date, edited: Date}
 // edited defaults to 0 when not edited
-function BlogCard({ layoutType, blogData }) {
+function BlogCard({ layoutType, blogData, key }) {
     const formattedDate = (dateInt) => {
         let date = new Date(dateInt);
         return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
@@ -118,17 +117,17 @@ function BlogCard({ layoutType, blogData }) {
     return (
         <>
             {layoutType === BlogLayoutType.LIST ? (
-                <div className={style.bloglistitem}>
+                <div className={style.bloglistitem} key={key}>
                     <p>
                         <strong>{blogData.title}</strong> {' --- '}
-                        {formattedDate(blogData.published)}
+                        {formattedDate(blogData.updatedAt)}
                     </p>
                 </div>
             ) : (
-                <div className={style.bloggriditem}>
+                <div className={style.bloggriditem} key={key}>
                     <strong>{blogData.title}</strong>
                     <p>{blogData.description.slice(0, 121) + '...'}</p>
-                    <p>{formattedDate(blogData.published)}</p>
+                    <p>{formattedDate(blogData.updatedAt)}</p>
                 </div>
             )}
         </>
