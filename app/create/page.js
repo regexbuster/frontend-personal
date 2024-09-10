@@ -2,7 +2,7 @@ import styles from './blogging.page.module.css';
 
 import BlogForm from './BlogForm';
 
-function Blogging() {
+function Create() {
     return (
         <main className={styles.main}>
             <BlogForm />
@@ -10,4 +10,4 @@ function Blogging() {
     );
 }
 
-export default Blogging;
+export default Create;
