@@ -19,14 +19,3 @@ export const dbConnect = async () => {
         throw new Error('MongoDB connection failed.');
     }
 };
-
-export const getDBPosts = async () => {
-    try {
-        await dbConnect();
-        const posts = await BlogPost.find({});
-        return { res: posts, err: null };
-    } catch (error) {
-        console.error(error);
-        return { res: null, err: error };
-    }
-};
