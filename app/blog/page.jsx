@@ -1,13 +1,30 @@
-import styles from './blog.page.module.css';
+import connectDB from '@/lib/connectDB';
+import BlogPost from '@/models/BlogPosts';
 
-import { BlogContainer } from './BlogItem';
+import Link from 'next/link';
 
-function Blog() {
+export default async function Page() {
+    await connectDB();
+
+    const content = await BlogPost.find();
+
     return (
-        <main className={styles.main}>
-            <BlogContainer />
+        <main>
+            {content.map((post) => {
+                return <BlogItem blogdata={post} />;
+            })}
         </main>
     );
 }
 
-export default Blog;
+const BlogItem = ({ blogdata }) => {
+    return (
+        <div>
+            <Link href={`/blog/${blogdata._id}`}>
+                <p>{blogdata.title}</p>
+                <p>{blogdata.description}</p>
+                <p>{blogdata.updatedAt.toString()}</p>
+            </Link>
+        </div>
+    );
+};
