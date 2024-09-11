@@ -9,5 +9,7 @@ const BlogPostSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-module.exports =
-    mongoose.models?.BlogPost || mongoose.model('BlogPost', BlogPostSchema);
+const BlogPost =
+    mongoose.models.BlogPost || mongoose.model('BlogPost', BlogPostSchema);
+
+export default BlogPost;

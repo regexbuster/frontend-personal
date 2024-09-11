@@ -1,26 +1,29 @@
-import axios from 'axios';
-import BlogDataGetter from './BlogDataGetter';
-import mongoose from 'mongoose';
+import connectDB from '@/lib/connectDB';
+import BlogPost from '@/models/BlogPosts';
 
-import styles from './blogid.page.module.css';
+import ReactMarkdown from 'react-markdown';
 
 export async function generateStaticParams() {
-    const _ = await mongoose.connect(process.env.MONGODB_URI);
-    const { db } = mongoose.connection;
+    await connectDB();
 
-    let posts = await db.collection('blogposts').find().toArray();
-
-    return posts.map((post) => {
-        return { id: `${post._id}` };
+    let ids = await BlogPost.find({}, '_id');
+    ids = ids.map((id) => {
+        return { id: id._id.toString() };
     });
+
+    return ids;
 }
 
-function BlogId({ params }) {
+export default async function Page({ params }) {
+    await connectDB();
+
+    const post = await BlogPost.findOne({ _id: [params.id] });
+
     return (
-        <main className={styles.main}>
-            <BlogDataGetter id={params.id} />
+        <main>
+            <h1>{post.title}</h1>
+            <blockquote>{post.description}</blockquote>
+            <ReactMarkdown>{post.content}</ReactMarkdown>
         </main>
     );
 }
-
-export default BlogId;

@@ -1,23 +1,30 @@
-import styles from './blog.page.module.css';
+import connectDB from '@/lib/connectDB';
+import BlogPost from '@/models/BlogPosts';
 
-import { BlogContainer } from './BlogItem';
+import Link from 'next/link';
 
-// export async function generateStaticParams() {
-//     // const db = await dbConnect();
+export default async function Page() {
+    await connectDB();
 
-//     let posts = await db.collection('blogposts').find().toArray();
+    const content = await BlogPost.find();
 
-//     console.log(`params ${posts}`);
-
-//     return { params: posts };
-// }
-
-function Blog({}) {
     return (
-        <main className={styles.main}>
-            <BlogContainer />
+        <main>
+            {content.map((post) => {
+                return <BlogItem blogdata={post} />;
+            })}
         </main>
     );
 }
 
-export default Blog;
+const BlogItem = ({ blogdata }) => {
+    return (
+        <div>
+            <Link href={`/blog/${blogdata._id}`}>
+                <p>{blogdata.title}</p>
+                <p>{blogdata.description}</p>
+                <p>{blogdata.updatedAt.toString()}</p>
+            </Link>
+        </div>
+    );
+};
