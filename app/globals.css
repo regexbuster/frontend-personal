@@ -72,3 +72,7 @@ strong,
 b {
     color: var(--orange);
 }
+
+p {
+    color: var(--fg);
+}

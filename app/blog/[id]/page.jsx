@@ -3,6 +3,8 @@ import BlogPost from '@/models/BlogPosts';
 
 import ReactMarkdown from 'react-markdown';
 
+import styles from './blogid.module.css';
+
 export async function generateStaticParams() {
     await connectDB();
 
@@ -20,10 +22,13 @@ export default async function Page({ params }) {
     const post = await BlogPost.findOne({ _id: [params.id] });
 
     return (
-        <main>
-            <h1>{post.title}</h1>
-            <blockquote>{post.description}</blockquote>
-            <ReactMarkdown>{post.content}</ReactMarkdown>
+        <main className={styles.main}>
+            <div className={styles.blogCard}>
+                <h1>{post.title}</h1>
+                <p>{post.description}</p>
+                <div className={styles.break}></div>
+                <ReactMarkdown>{post.content}</ReactMarkdown>
+            </div>
         </main>
     );
 }
