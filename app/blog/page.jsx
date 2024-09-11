@@ -1,14 +1,30 @@
-import { getPosts } from '@/utils/actions.js';
+import connectDB from '@/lib/connectDB';
+import BlogPost from '@/models/BlogPosts';
+
+import Link from 'next/link';
 
 export default async function Page() {
-    let posts = await getPosts();
+    await connectDB();
+
+    const content = await BlogPost.find();
 
     return (
         <main>
-            {console.log(posts) &&
-                posts.map((item) => {
-                    return <p>{item}</p>;
-                })}
+            {content.map((post) => {
+                return <BlogItem blogdata={post} />;
+            })}
         </main>
     );
 }
+
+const BlogItem = ({ blogdata }) => {
+    return (
+        <div>
+            <Link href={`/blog/${blogdata._id}`}>
+                <p>{blogdata.title}</p>
+                <p>{blogdata.description}</p>
+                <p>{blogdata.updatedAt.toString()}</p>
+            </Link>
+        </div>
+    );
+};
