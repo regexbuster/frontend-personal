@@ -1,23 +1,14 @@
-import styles from './blog.page.module.css';
+import { getPosts } from '@/utils/actions.js';
 
-import { BlogContainer } from './BlogItem';
+export default async function Page() {
+    let posts = await getPosts();
 
-// export async function generateStaticParams() {
-//     // const db = await dbConnect();
-
-//     let posts = await db.collection('blogposts').find().toArray();
-
-//     console.log(`params ${posts}`);
-
-//     return { params: posts };
-// }
-
-function Blog({}) {
     return (
-        <main className={styles.main}>
-            <BlogContainer />
+        <main>
+            {console.log(posts) &&
+                posts.map((item) => {
+                    return <p>{item}</p>;
+                })}
         </main>
     );
 }
-
-export default Blog;

@@ -22,17 +22,18 @@ export const dbConnect = async () => {
             bufferCommands: false,
         };
 
-        cached.promise = (await mongoose.connect(MONGODB_URI, opts)).then(
-            (mongoosePromise) => {
+        cached.promise = mongoose
+            .connect(MONGODB_URI, opts)
+            .then((mongoosePromise) => {
                 return mongoosePromise;
-            }
-        );
+            });
 
         try {
             cached.conn = await cached.promise;
         } catch (err) {
             throw err;
         }
+
         return cached.conn;
     }
 };
