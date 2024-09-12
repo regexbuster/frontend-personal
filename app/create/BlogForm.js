@@ -1,40 +1,38 @@
-'use client';
-
-import { useState } from 'react';
-import ControlledInput from '@/components/ControlledInput';
-import ControlledTextarea from '@/components/ControlledTextarea';
+import connectDB from '@/lib/connectDB';
+import BlogPost from '@/models/BlogPosts';
 
 import styles from './blogging.page.module.css';
-import axios from 'axios';
 
 function BlogForm() {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [content, setContent] = useState('');
+    const makePost = async (formData) => {
+        'use server';
 
-    const createBlog = async () => {
-        await axios.post('/api/posts', { title, description, content });
+        let post = {};
+
+        for (let [key, value] of formData.entries()) {
+            post[key] = value;
+        }
+
+        await connectDB();
+
+        await BlogPost.create(post);
     };
 
     return (
-        <div className={styles.inputForm}>
-            <ControlledInput
-                name={'Title'}
-                value={title}
-                updateValue={setTitle}
-            ></ControlledInput>
-            <ControlledInput
-                name={'Description'}
-                value={description}
-                updateValue={setDescription}
-            ></ControlledInput>
-            <ControlledTextarea
-                name={'Content'}
-                value={content}
-                updateValue={setContent}
-            ></ControlledTextarea>
-            <button onClick={createBlog}>Submit</button>
-        </div>
+        <form action={makePost} className={styles.inputForm}>
+            <label htmlFor="title">Title</label>
+            <input type="text" id="title" name="title"></input>
+            <label htmlFor="description">Description</label>
+            <input type="text" id="description" name="description"></input>
+            <label htmlFor="content">Content</label>
+            <textarea
+                type="text"
+                id="content"
+                name="content"
+                className={styles.textarea}
+            ></textarea>
+            <button type="submit">Submit</button>
+        </form>
     );
 }
 
