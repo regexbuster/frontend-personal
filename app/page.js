@@ -29,8 +29,12 @@ export default function Home() {
                         to showcase the work I've done through blog posts.
                     </p>
                 </div>
-                <div className={styles.card}>Hello World</div>
-                <div className={styles.card}>Hello World</div>
+                <div className={styles.card}>
+                    <a href="/api/auth/login">Login</a>
+                </div>
+                <div className={styles.card}>
+                    <a href="/api/auth/logout">Logout</a>
+                </div>
                 <div className={styles.card}>Hello World</div>
                 <div className={styles.card}>Hello World</div>
                 <div className={styles.card}>Hello World</div>

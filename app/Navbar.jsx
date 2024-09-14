@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import style from './Navbar.module.css';
 
-function Navbar() {
+async function Navbar() {
     const links = [
         { href: '/', name: 'Home' },
         { href: '/about', name: 'About' },
