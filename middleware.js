@@ -1,3 +1,7 @@
-// import { NextResponse } from "next/server";
+import { withMiddlewareAuthRequired } from '@auth0/nextjs-auth0/edge';
 
-// import {}
+export default withMiddlewareAuthRequired();
+
+export const config = {
+    matcher: ['/create'],
+};
