@@ -1,6 +1,10 @@
 import styles from './page.module.css';
 
-export default function Home() {
+import { getSession } from '@auth0/nextjs-auth0';
+
+export default async function Home() {
+    // const session = await getSession();
+
     return (
         <main className={styles.main}>
             {/* <h1>Heading 1</h1>
@@ -35,7 +39,11 @@ export default function Home() {
                 <div className={styles.card}>
                     <a href="/api/auth/logout">Logout</a>
                 </div>
-                <div className={styles.card}>Hello World</div>
+                {/* {session && session.user && (
+                    <div className={styles.card}>{`${JSON.stringify(
+                        session
+                    )}`}</div>
+                )} */}
                 <div className={styles.card}>Hello World</div>
                 <div className={styles.card}>Hello World</div>
                 <div className={styles.card}>Hello World</div>
