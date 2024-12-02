@@ -1,8 +1,6 @@
 .main {
-    background-color: var(--bg);
-    color: var(--fg);
+  background-color: var(--bg);
+  color: var(--fg);
 
-    width: 100vw;
-    min-height: 92.5vh;
-    height: auto;
+  width: 100vw;
 }

@@ -1,44 +1,43 @@
 .main {
-    background-color: var(--bg);
+  background-color: var(--bg);
 
-    width: 100vw;
-    min-height: 92.5vh;
+  width: 100vw;
 
-    padding-top: 2vh;
+  padding-top: 2vh;
 
-    display: flex;
-    flex-flow: column;
-    gap: 2vh;
-    align-items: center;
+  display: flex;
+  flex-flow: column;
+  gap: 2vh;
+  align-items: center;
 }
 
 .blogCard {
-    width: 80%;
+  width: 80%;
 
-    background-color: var(--bg1);
+  background-color: var(--bg1);
 
-    border: 0.15rem solid var(--bg2);
-    border-radius: 1rem;
+  border: 0.15rem solid var(--bg2);
+  border-radius: 1rem;
 
-    padding: 1rem;
+  padding: 1rem;
 
-    box-shadow: 0.25rem 0.25rem 0.1rem 0.1rem var(--bg1);
+  box-shadow: 0.25rem 0.25rem 0.1rem 0.1rem var(--bg1);
 }
 
 .link {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 .link:hover {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 .horizDiv {
-    display: flex;
-    flex-flow: row;
+  display: flex;
+  flex-flow: row;
 
-    justify-content: space-between;
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }

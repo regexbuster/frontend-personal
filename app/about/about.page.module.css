@@ -1,8 +1,53 @@
-.main {
-    background-color: var(--bg);
-    color: var(--fg);
+.aboutmain {
+  background-color: var(--bg);
+  color: var(--fg);
 
-    width: 100vw;
-    min-height: 92.5vh;
-    height: auto;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+  align-items: center;
+
+  overflow: auto;
+
+  gap: 1rem;
+
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+
+  width: 100vw;
+
+  position: relative;
+}
+
+.aboutmain > div {
+  width: 60%;
+
+  background-color: var(--bg1);
+
+  border: 0.15rem solid var(--bg2);
+  border-radius: 1rem;
+
+  padding: 1rem;
+
+  box-shadow: 0.25rem 0.25rem 0.1rem 0.1rem var(--bg1);
+}
+
+.resumefloater {
+  position: absolute;
+  top: 1vh;
+  right: 1vw;
+
+  background-color: var(--bg1);
+
+  padding: 1rem;
+
+  text-decoration: none;
+
+  border-radius: 1rem;
+  border: 0.1rem solid var(--fg0);
+}
+
+.resumefloater:hover {
+  background-color: var(--bg2);
 }

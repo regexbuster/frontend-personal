@@ -1,10 +1,15 @@
 .toggle {
-    width: min(3vh, 3vw);
-    height: min(3vh, 3vw);
+  /* width: min(3vh, 3vw); */
+  /* height: min(3vh, 3vw); */
 
-    position: fixed;
-    bottom: min(2vh, 2vw);
-    right: min(2vh, 2vw);
+  position: fixed;
+  bottom: min(2vh, 2vw);
+  right: min(2vh, 2vw);
 
-    background-color: red;
+  /* background-color: red; */
+  background-color: var(--bg1);
+
+  border: 0.15rem solid var(--bg2);
+
+  color: var(--fg);
 }

@@ -1,0 +1,37 @@
+.footer {
+  width: 100vw;
+
+  display: flex;
+  flex-flow: column;
+
+  justify-content: space-evenly;
+  align-items: center;
+
+  background-color: var(--bg0);
+  border-top: 0.1rem solid var(--fg0);
+}
+
+.contentdiv {
+  width: 50vw;
+
+  display: flex;
+  flex-flow: column;
+
+  justify-content: space-between;
+  gap: 1vh;
+  align-items: center;
+}
+
+.linkrow {
+  display: flex;
+  flex-flow: row;
+
+  justify-content: space-evenly;
+  gap: 1vw;
+  align-items: center;
+}
+
+.image {
+  width: min(3vh, 3vw);
+  height: min(3vh, 3vw);
+}

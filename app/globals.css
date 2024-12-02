@@ -1,28 +1,28 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 * {
-    margin: 0;
+  margin: 0;
 }
 body {
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 img,
 picture,
 video,
 canvas,
 svg {
-    display: block;
-    max-width: 100%;
+  display: block;
+  max-width: 100%;
 }
 input,
 button,
 textarea,
 select {
-    font: inherit;
+  font: inherit;
 }
 p,
 h1,
@@ -31,55 +31,55 @@ h3,
 h4,
 h5,
 h6 {
-    overflow-wrap: break-word;
+  overflow-wrap: break-word;
 }
 #root,
 #__next {
-    isolation: isolate;
+  isolation: isolate;
 }
 
 /* post reset */
 
 body {
-    font-size: 100%;
+  font-size: 100%;
 }
 
 h1 {
-    color: var(--red);
+  color: var(--red);
 }
 
 h2 {
-    color: var(--green);
+  color: var(--green);
 }
 
 h3 {
-    color: var(--yellow);
+  color: var(--yellow);
 }
 
 h4 {
-    color: var(--blue);
+  color: var(--blue);
 }
 
 h5 {
-    color: var(--purple);
+  color: var(--purple);
 }
 
 h6 {
-    color: var(--aqua);
+  color: var(--aqua);
 }
 
 strong,
 b {
-    color: var(--orange);
+  color: var(--orange);
 }
 
 p,
 label {
-    color: var(--fg);
+  color: var(--fg);
 }
 
 input,
 textarea {
-    color: var(--fg);
-    background-color: var(--bg2);
+  color: var(--fg);
+  background-color: var(--bg2);
 }
