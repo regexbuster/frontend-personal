@@ -4,3 +4,38 @@
 
   width: 100vw;
 }
+
+.container {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto-fill);
+  grid-row-gap: 0.5em;
+  grid-column-gap: 1em;
+
+  padding: 1rem;
+}
+
+.container > a {
+  text-decoration: none;
+}
+
+.card {
+  width: 100%;
+  /* height: 80%; */
+
+  background-color: var(--bg1);
+  color: var(--fg);
+
+  border: 0.15rem solid var(--bg2);
+  border-radius: 1rem;
+
+  padding: 1rem;
+
+  box-shadow: 0.25rem 0.25rem 0.1rem 0.1rem var(--bg1);
+}
+
+.card > image {
+  align-items: center;
+}

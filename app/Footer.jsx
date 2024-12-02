@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 import styles from "./footer.module.css";
@@ -23,7 +25,11 @@ export default function Footer() {
           <a href="https://github.com/regexbuster" target="_blank">
             <Image
               className={styles.image}
-              src="/github-mark-dark.svg"
+              src={
+                localStorage.getItem("theme") == "dark"
+                  ? "/github-mark-light.svg"
+                  : "/github-mark-dark.svg"
+              }
               alt="Github logo"
               width="50"
               height="50"
@@ -33,7 +39,11 @@ export default function Footer() {
           <a href="https://x.com/regexbuster" target="_blank">
             <Image
               className={styles.image}
-              src="/x-logo-dark.png"
+              src={
+                localStorage.getItem("theme") == "dark"
+                  ? "/x-logo-light.png"
+                  : "/x-logo-dark.png"
+              }
               alt="X/Twitter logo"
               width="50"
               height="50"
@@ -43,7 +53,11 @@ export default function Footer() {
           <a href="mailto:franksbn@mail.uc.edu" target="_blank">
             <Image
               className={styles.image}
-              src="/email-dark.svg"
+              src={
+                localStorage.getItem("theme") == "dark"
+                  ? "/email-light.svg"
+                  : "/email-dark.svg"
+              }
               alt="Email Link"
               width="50"
               height="50"
@@ -56,7 +70,11 @@ export default function Footer() {
           >
             <Image
               className={styles.image}
-              src="/resume-dark.svg"
+              src={
+                localStorage.getItem("theme") == "dark"
+                  ? "/resume-light.svg"
+                  : "/resume-dark.svg"
+              }
               alt="Resume Download Link"
               width="50"
               height="50"
@@ -69,9 +87,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-/*
-© 2024 John Doe | Cybersecurity Engineer  
-[LinkedIn Icon] [GitHub Icon] [Twitter Icon] | [Email Address] | [Download Resume (PDF)]  
-Privacy Policy | Terms of Service
-*/

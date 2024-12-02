@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import style from "./ThemeToggle.module.css";
 
@@ -11,6 +12,7 @@ const ThemeType = {
 
 function ThemeToggle() {
   const [theme, setTheme] = useState(ThemeType.LIGHT);
+  const router = useRouter();
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -26,6 +28,7 @@ function ThemeToggle() {
     setTheme(newTheme);
     document.body.className = newTheme;
     localStorage.setItem("theme", newTheme);
+    router.refresh();
   };
 
   return (
